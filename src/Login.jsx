@@ -1,5 +1,5 @@
 import React from "react";
-import InputBox from "./InputBox";
+import InputBox from "./components/InputBox";
 
 const Login = () => {
   // const [user,setUserData] = useState({email:'', password:''});
