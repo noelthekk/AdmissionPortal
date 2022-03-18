@@ -6,7 +6,7 @@ function InputBox(props) {
   return (
     <div>
       <label htmlFor={props.type}>
-          {props.type}
+          {props.labelName}
       </label>
       <input
         type={props.type}

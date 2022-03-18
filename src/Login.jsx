@@ -28,8 +28,8 @@ const Login = () => {
         <h1 className={classes.formHeading}>Log in to your account</h1>
 
         <form onSubmit={handleFormSubmit}>
-          <InputBox type="email" design={classes.inputBoxDesign} />
-          <InputBox type="password" design={classes.inputBoxDesign} />
+          <InputBox type="email" design={classes.inputBoxDesign} labelName="Email"/>
+          <InputBox type="password" design={classes.inputBoxDesign} labelName="Password"/>
 
           {/* 
                     <div>
