@@ -14,11 +14,18 @@ const DataSheet = () => {
     btnCharacter: `bg-green py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`,
     inputBoxDesign: `w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`,
   };
-
+  {
+    /* 
+  const fields = {
+    passoutYear: "",
+    schoolName: "",
+  }
+*/
+  }
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      passoutYear: "",
+      schoolName: "",
     },
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
@@ -29,24 +36,24 @@ const DataSheet = () => {
       <div className={classes.formContainer}>
         <h1 className={classes.formHeading}>Log in to your account</h1>
         <form onSubmit={formik.handleSubmit}>
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor="passoutYear">Passout Year</label>
           <input
-            id="email"
+            id="passoutYear"
             className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-            name="email"
-            type="email"
+            name="passoutYear"
+            type="text"
             onChange={formik.handleChange}
-            value={formik.values.email}
+            value={formik.values.passoutYear}
           />
 
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor="schoolName">Passout Year</label>
           <input
-            id="password"
+            id="schoolName"
             className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
-            name="password"
-            type="password"
+            name="schoolName"
+            type="text"
             onChange={formik.handleChange}
-            value={formik.values.password}
+            value={formik.values.schoolName}
           />
 
           <div
