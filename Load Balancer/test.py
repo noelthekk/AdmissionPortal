@@ -25,6 +25,7 @@ def timeseries_to_supervised(data, lag=1):
 	df = DataFrame(data)
 	columns = [df.shift(i) for i in range(1, lag+1)]
 	columns.append(df)
+	print(type(columns))
 	df = concat(columns, axis=1)
 	df.fillna(0, inplace=True)
 	return df
@@ -81,7 +82,7 @@ diff_values = difference(raw_values, 1)
 # transform data to be supervised learning
 supervised = timeseries_to_supervised(diff_values, 1)
 supervised_values = supervised.values
-
+print(type(supervised))
 # split data into train and test-sets
 validation = supervised_values[-12:]
 
@@ -90,6 +91,7 @@ scaler, validation_scaled = scale(validation)
 
 # load the model
 lstm_model = models.load_model(model_location)
+
 predictions = list()
 for i in range(len(validation_scaled)):
 	# make one-step forecast
@@ -101,7 +103,6 @@ for i in range(len(validation_scaled)):
 	yhat = inverse_difference(raw_values, yhat, len(validation_scaled)+1-i)
 	# store forecast
 	predictions.append(yhat)
-	# report performance
 	
 rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
 
