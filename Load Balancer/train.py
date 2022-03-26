@@ -94,9 +94,9 @@ data_prep_location = './Data Objects/'
 #(10, 500, 30, 13097705.299)
 #(12, 125, 15, 14240891.783)
 
-repeats = 1
-numberOfEpochs = 10
-numberOfNeurons = 4
+repeats = 10
+numberOfEpochs = 500
+numberOfNeurons = 6
 
 
 # load dataset
