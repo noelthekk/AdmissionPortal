@@ -16,10 +16,6 @@ import numpy
 from pickle import load
 
 # date-time parsing function for loading the dataset
-def parser(x):
-  x = x[:-4]
-  return datetime.strptime(x, '%Y-%m-%dT%H:%M:%S')
-
 def parser2(x):
   return datetime.strptime(x, '%Y-%m-%d')
 
