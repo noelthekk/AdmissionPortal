@@ -36,7 +36,8 @@ function CandidatePassword() {
             </div>
           
           </div>
-          <input type="submit" className="ml-20 btn"   value="Conirm Password" />
+          <div className='formFieldDiv'><input type="submit" className="btn"   value="Conirm Password" /></div>
+          
       </form>
     </div>
   )

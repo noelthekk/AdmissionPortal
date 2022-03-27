@@ -1,4 +1,5 @@
 import React from 'react'
+import { Routes, Route, Link } from "react-router-dom";
 import CandidatePassword from './CandidatePassword'
 import CandidateRegistrationForm from './CandidateRegistrationForm'
 import CandidateVerification from './CandidateVerification'
@@ -6,11 +7,14 @@ import CandidateVerification from './CandidateVerification'
 function CandidateRegistrationWrapper() {
     const registrationComponents=[<CandidateRegistrationForm/>,<CandidateVerification/>,<CandidatePassword/>]
   return (
-    <div className='bg-white h-max'>
+    <div className='bg-white h-max mt-20 rounded-lg'>
         <div className='text-center font-medium text-xl uppercase pt-10'>Candidate Registration</div><br/>
-        <div>{registrationComponents[0]}</div>
-        {/* <div><CandidateVerification/></div>
-        <div><CandidatePassword/></div> */}
+        <Routes>
+        <Route path="/" element={<CandidateRegistrationForm />} />
+        <Route path="otp" element={<CandidateVerification />} />
+        <Route path="pswd" element={<CandidatePassword/>} />
+      </Routes>
+        
         
         </div>
   )
