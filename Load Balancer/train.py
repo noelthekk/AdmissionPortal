@@ -109,7 +109,7 @@ diff_values = difference(raw_values, 1)
 # transform data to be supervised learning
 supervised = timeseries_to_supervised(diff_values, 1)
 supervised_values = supervised.values
-print(supervised_values)
+
 # split data into train and test-sets
 train, test = supervised_values[0:-24], supervised_values[-24:-12]
 
