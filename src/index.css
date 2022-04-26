@@ -3,5 +3,12 @@
 @tailwind utilities;
 
 .btn{
-    @apply rounded-full py-2 px-3 uppercase font-bold text-xs tracking-wider cursor-pointer border-2;
+    @apply rounded-full py-2 px-5 uppercase font-bold text-sm tracking-wider cursor-pointer border-2 border-blue-200 hover:bg-blue-200 drop-shadow-md;
+  }
+  .formFieldClass{
+    @apply focus:ring-indigo-500 focus:border-indigo-500 block w-3/5 border-gray-200 border-2 rounded-md pl-3 py-1;
+  }
+  
+  .formFieldDiv{
+    @apply flex items-center px-10 pb-3;
   }
