@@ -1,30 +1,34 @@
-import React,{useState} from 'react'
+import React, { useDebugValue, useState } from "react";
 
-function CandidateVerification() {
-    const [otpBtn, setotpBtn] = useState(true)
+function CandidateSuccess() {
+  let url = "";
   return (
-    <div>
-        <div className="formFieldDiv">
-            <div className='w-2/5'>Mobile Number</div>
-            <div className='w-3/5 formFieldClass'>+91 9876543210</div>
+    <div className="flex flex-col">
+      <div className="bg-green-succ mx-10 h-max mt-30 rounded flex flex-row-nowrap">
+        <div className="icon">
+          <img
+            className="object-contain h-5 w-5 m-2 "
+            src="https://img.icons8.com/color/48/000000/ok--v1.png"
+            alt="tick"
+          />
         </div>
-        {otpBtn?<div className="formFieldDiv">
-        <button className='btn' onClick={()=>{setotpBtn(false)}}>Send OTP</button>
-        </div>:       
-        <div className="formFieldDiv">
-            <div className='w-2/5'>Enter OTP</div>
-            <div className='flex justify-evenly'>
-            <input type="number"
-                    id="recievedOtp"
-                    name="recievedOtp" className='focus:ring-indigo-500 focus:border-indigo-500 block border-gray-200 border-2 rounded-md pl-3 py-1'></input>
-            <button className='btn ml-5'>Verify OTP</button>
-            </div>
-            
-        </div>}
-        
-        
+
+        <div className=" m-1 px-10 grow h-2">
+          Candidate Registration Success
+        </div>
+      </div>
+
+      <div className="text-center m-10">
+        You can login with Application No: as Username, Password and Applied
+        District
+      </div>
+
+      {/* <div className="text-center m-10"> */}
+        <a className="text-center m-10" href={url}>Candidate Login</a>
+      {/* </div> */}
+    
     </div>
-  )
+  );
 }
 
-export default CandidateVerification
+export default CandidateSuccess;
