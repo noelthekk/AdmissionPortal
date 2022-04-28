@@ -3,8 +3,8 @@ import React,{useState} from 'react'
 function CandidateVerification() {
     const [otpBtn, setotpBtn] = useState(true)
   return (
-    <div>
-        <div className="formFieldDiv">
+    <div >
+        <div className="formFieldDiv pt-8 space-y-6">
             <div className='w-2/5'>Mobile Number</div>
             <div className='w-3/5 formFieldClass'>+91 9876543210</div>
         </div>
@@ -21,8 +21,6 @@ function CandidateVerification() {
             </div>
             
         </div>}
-        
-        
     </div>
   )
 }
