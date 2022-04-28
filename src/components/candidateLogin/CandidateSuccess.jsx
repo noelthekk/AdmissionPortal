@@ -1,4 +1,4 @@
-import React, { useDebugValue, useState } from "react";
+import React from "react";
 
 function CandidateSuccess() {
   let url = "";
@@ -23,9 +23,7 @@ function CandidateSuccess() {
         District
       </div>
 
-      {/* <div className="text-center m-10"> */}
         <a className="text-center m-10" href={url}>Candidate Login</a>
-      {/* </div> */}
     
     </div>
   );
