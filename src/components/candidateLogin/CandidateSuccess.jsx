@@ -1,4 +1,4 @@
-import React, { useDebugValue, useState } from "react";
+import React from "react";
 
 function CandidateSuccess() {
   let url = "";
