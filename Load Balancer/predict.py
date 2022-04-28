@@ -68,7 +68,7 @@ model_location = './Model/'
 data_prep_location = './Data Objects/'
 
 # load dataset
-series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, squeeze=True, date_parser=parser2)
+series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, date_parser=parser2).squeeze("columns")
 
 # transform data to be stationary
 raw_values = series.values

@@ -94,13 +94,13 @@ data_prep_location = './Data Objects/'
 #(10, 500, 30, 13097705.299)
 #(12, 125, 15, 14240891.783)
 
-repeats = 10
+repeats = 2
 numberOfEpochs = 500
-numberOfNeurons = 6
+numberOfNeurons = 30
 
 
 # load dataset
-series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, squeeze=True, date_parser=parser2)
+series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, date_parser=parser2).squeeze("columns")
 
 # transform data to be stationary
 raw_values = series.values
