@@ -1,4 +1,5 @@
-import React, { useDebugValue, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
 function CandidateSuccess() {
   let url = "";
@@ -16,17 +17,15 @@ function CandidateSuccess() {
         <div className=" px-10 h-2 w-4/6 mt-1">
           Candidate Registration Success
         </div>
-        
       </div>
 
       <div className="text-center my-8 ">
         You can login with Application No: as Username, Password and Applied
         District
       </div>
-      <button className="btn w-54 mb-5">Candidate Login</button>
-      
-      
-    
+      <Link to="/pswd" activeClassName="active">
+        <button className="btn w-54 mb-5">Candidate Login</button>
+      </Link>
     </div>
   );
 }
