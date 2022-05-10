@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
-import ResultScreen from './ResultScreen'
+import ResultScreen from './ResultScreen/ResultScreen'
+
 
 function App() {
   

@@ -31,6 +31,7 @@ theme: {
               DEFAULT: '#EB5757',
               dark: '#C20D0D',
           },
+        
           orange: {
               light: '#FFEBDA',
               DEFAULT: '#F66A0A',
