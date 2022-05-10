@@ -11,7 +11,6 @@ from keras.layers import Dense
 from keras.layers import LSTM
 from keras import models
 from math import sqrt
-from matplotlib import pyplot
 import numpy
 from pickle import load
 
@@ -37,10 +36,6 @@ def difference(dataset, interval=1):
 		value = dataset[i] - dataset[i - interval]
 		diff.append(value)
 	return Series(diff)
-
-# invert differenced value
-def inverse_difference(history, yhat, interval=1):
-	return yhat + history[-interval]
 
 # scale train and test data to [-1, 1]
 def scale(validation):
@@ -83,32 +78,19 @@ diff_values = difference(raw_values, 1)
 supervised = timeseries_to_supervised(diff_values, 1)
 supervised_values = supervised.values
 
-# split data into train and test-sets
-validation = supervised_values[-12:]
+window = supervised_values[-12:]
 
 # transform the scale of the data
-scaler, validation_scaled = scale(validation)
+scaler, window_scaled = scale(window)
 
 # load the model
 lstm_model = models.load_model(model_location)
-
-predictions = list()
-for i in range(len(validation_scaled)):
-	# make one-step forecast
-	X, y = validation_scaled[i, 0:-1], validation_scaled[i, -1]
-	yhat = forecast_lstm(lstm_model, 1, X)
-	# invert scaling
-	yhat = invert_scale(scaler, X, yhat)
-	# invert differencing
-	yhat = inverse_difference(raw_values, yhat, len(validation_scaled)+1-i)
-	# store forecast
-	predictions.append(yhat)
 	
-rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
+X = window_scaled[-1, -1:]
+yhat = forecast_lstm(lstm_model, 1, X)
+yhat = invert_scale(scaler, X, yhat)
+yhat += raw_values[-1]
 
-Series(predictions).plot(label='Predicted Load')
-Series(raw_values[-12:]).plot(label='Actual Load')
-pyplot.legend()
-pyplot.show()
+yhat = round(yhat)
 
-print('Root Mean Squared Error: %0.3f' % rmse)
+print(yhat)
