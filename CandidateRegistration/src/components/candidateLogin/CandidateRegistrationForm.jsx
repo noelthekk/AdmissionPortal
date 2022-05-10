@@ -4,7 +4,6 @@ import Axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
 function CandidateRegistrationForm() {
-   // January, February, March, April, May, June, July, August, September, October, November, December
     var month=["January","February","March","April","May", "June", "July", "August","September", "October", "November", "December"]
     const [startDate, setStartDate] = useState(new Date());
     const [sslcScheme, setSslcScheme] = useState("SSLC (2021-2022)");
