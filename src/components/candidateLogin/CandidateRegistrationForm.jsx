@@ -108,6 +108,7 @@ function CandidateRegistrationForm() {
                     className="formFieldClass">                   
                 </input>
             </div>
+            
 
             <div className="formFieldDiv">
                 <label htmlFor="modeOfApplication" className="w-2/5">
@@ -127,6 +128,8 @@ function CandidateRegistrationForm() {
             <input className="ml-5 btn" type="reset" value="Reset" />
             </div>
           </div>
+          
+          
       
       </form>
     </div>
