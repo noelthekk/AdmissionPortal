@@ -69,7 +69,7 @@ def forecast_lstm(model, batch_size, X):
 
 data_location = '/app/Data/'
 model_location = '/app/Model/'
-data_prep_location = '/app/Data Objects/'
+data_prep_location = '/app/DataObjects/'
 
 # load dataset
 series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, date_parser=parser2).squeeze("columns")

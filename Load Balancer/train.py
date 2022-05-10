@@ -86,9 +86,9 @@ def forecast_lstm(model, batch_size, X):
 
 # directories and parameters
 
-data_location = './Data/'
-model_location = './Model/'
-data_prep_location = './Data Objects/'
+data_location = '/app/Data/'
+model_location = '/app/Model/'
+data_prep_location = '/app/DataObjects/'
 
 # promising values:
 #(10, 500, 30, 13097705.299)
