@@ -3,17 +3,18 @@ version: "3.7"
 services:
   load-balancer:
     build: .
+    command: sh -c "python3 test.py"
     ports:
       - 3000:3000
     working_dir: /app
     volumes:
       - type: bind 
-        source: /home/ubuntu/Desktop/Admission\ Portal/Load\ Balancer/Data
+        source: ./Data
         target: /app/Data
       - type: bind 
-        source: /home/ubuntu/Desktop/Admission\ Portal/Load\ Balancer/Model
+        source: ./Model
         target: /app/Model
       - type: bind
-        source: /home/ubuntu/Desktop/Admission\ Portal/Load\ Balancer/Data\ Objects
-        target: /app/Data\ Objects
+        source: ./DataObjects
+        target: /app/DataObjects
 
