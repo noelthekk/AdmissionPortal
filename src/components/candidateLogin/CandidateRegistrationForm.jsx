@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-
+import Axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
 function CandidateRegistrationForm() {
-    
-    var month=["January","February","March","April"]
+   // January, February, March, April, May, June, July, August, September, October, November, December
+    var month=["January","February","March","April","May", "June", "July", "August","September", "October", "November", "December"]
     const [startDate, setStartDate] = useState(new Date());
     const [sslcScheme, setSslcScheme] = useState("SSLC (2021-2022)");
     const [registerNumber, setRegisterNumber] = useState("")
-    function handleSubmit(event){
-        console.log(registerNumber)
-        event.preventDefault();
+    const [yearPass, setyearPass] = useState("")
+    const [monthPass, setmonthPass] = useState("")
+    const [mobileNumber, setMobileNumber] = useState("")
+    const handleSubmit=() => {
+        Axios.post("http://localhost:3000/register",{
+            sslc_scheme: sslcScheme,
+            reg_num: registerNumber,
+            month_pass: monthPass,
+            year_pass: yearPass,
+            dob: startDate
+        })
     }
   return (
     <div>
@@ -53,6 +61,8 @@ function CandidateRegistrationForm() {
                 <select
                     id="monthPass"
                     name="monthPass"
+                    value={monthPass}
+                    onChange={(e)=>setmonthPass(e.target.value)}
                     className="formFieldClass">
                     {month.map((value)=><option>{value}</option>)}
                 </select>
@@ -65,6 +75,8 @@ function CandidateRegistrationForm() {
                 <select
                     id="yearPass"
                     name="yearPass"
+                    value = {yearPass}
+                    onChange={(e)=>setyearPass(e.target.value)}
                     className="formFieldClass">
                     {[2019,2020,2021].map((value)=><option>{value}</option>)}
                 </select>
@@ -92,6 +104,8 @@ function CandidateRegistrationForm() {
                     prefix="+91"
                     id="mobileNo"
                     name="mobileNo"
+                    value={mobileNumber}
+                    onChange={(e)=>setMobileNumber(e.target.value)}
                     className="formFieldClass">                   
                 </input>
             </div>
