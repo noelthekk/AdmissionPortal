@@ -10,7 +10,7 @@ def parser(x):
   x = x[:-4]
   return datetime.strptime(x, '%Y-%m-%dT%H:%M:%S')
 
-data_location = './Data/'
+data_location = '/app/Data/'
 
 
 series = read_csv(data_location + 'lacity.org-website-traffic.csv', header=0, index_col=0, parse_dates=[0], date_parser=parser)
