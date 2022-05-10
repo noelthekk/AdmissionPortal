@@ -1,4 +1,5 @@
 const mysql=require('mysql');
+
 var mysqlConnection=mysql.createConnection(
    {
     hostname:"localhost",
