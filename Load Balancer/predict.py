@@ -24,7 +24,6 @@ def timeseries_to_supervised(data, lag=1):
 	df = DataFrame(data)
 	columns = [df.shift(i) for i in range(1, lag+1)]
 	columns.append(df)
-	print(type(columns))
 	df = concat(columns, axis=1)
 	df.fillna(0, inplace=True)
 	return df
