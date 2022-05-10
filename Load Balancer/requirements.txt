@@ -1,9 +1,7 @@
-tensorflow
-pandas
-sklearn
-keras
-matplotlib
-numpy
-pyqt5
-
-sudo apt-get install qt5-default
+tensorflow==2.8.0
+tensorflow-io-gcs-filesystem==0.25.0
+pandas==1.4.2
+sklearn==0.0
+keras==2.8.0
+matplotlib==3.5.1
+numpy==1.22.3
