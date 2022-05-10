@@ -68,9 +68,9 @@ def forecast_lstm(model, batch_size, X):
 
 # directories and parameters
 
-data_location = './Data/'
-model_location = './Model/'
-data_prep_location = './Data Objects/'
+data_location = '/app/Data/'
+model_location = '/app/Model/'
+data_prep_location = '/app/Data Objects/'
 
 # load dataset
 series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, date_parser=parser2).squeeze("columns")
@@ -106,9 +106,9 @@ for i in range(len(validation_scaled)):
 	
 rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
 
-Series(predictions).plot(label='Predicted Load')
-Series(raw_values[-12:]).plot(label='Actual Load')
-pyplot.legend()
-pyplot.show()
+# Series(predictions).plot(label='Predicted Load')
+# Series(raw_values[-12:]).plot(label='Actual Load')
+# pyplot.legend()
+# pyplot.show()
 
 print('Root Mean Squared Error: %0.3f' % rmse)

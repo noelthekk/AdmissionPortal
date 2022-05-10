@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  load-balancer:
+    build: .
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - type: bind 
+        source: /home/ubuntu/Desktop/Admission\ Portal/Load\ Balancer/Data
+        target: /app/Data
+      - type: bind 
+        source: /home/ubuntu/Desktop/Admission\ Portal/Load\ Balancer/Model
+        target: /app/Model
+      - type: bind
+        source: /home/ubuntu/Desktop/Admission\ Portal/Load\ Balancer/Data\ Objects
+        target: /app/Data\ Objects
+
