@@ -30,31 +30,31 @@ export default defineConfig({
 
 # Structre of the Project 
 
-project
-├── src
-│   └── components
-│       └── candidateLogin
-│           ├── CandidatePassword.jsx
-│           ├── CandidateRegisterationForm.jsx
-│           ├── CandidateRegisterationWrapper.jsx
-│           ├── CandidateSuccess.jsx
-│           └── CandidateVerification.jsx
+project <br>
+├── src <br>
+│   └── components<br>
+│       └── candidateLogin<br>
+│           ├── CandidatePassword.jsx<br>
+│           ├── CandidateRegisterationForm.jsx<br>
+│           ├── CandidateRegisterationWrapper.jsx<br>
+│           ├── CandidateSuccess.jsx<br>
+│           └── CandidateVerification.jsx<br>
+│<br>
+├── server<br>
+│   └── sql <br>
+│       ├── sql1.sql <br>
+│       └── sql2.sql <br>
 │
-├── server
-│   └── sql
-│       ├── sql1.sql
-│       └── sql2.sql
+├── Load Balancer <br>
+│   ├── Data Objects <br>
+│   ├── Model<br>
+│   ├── data_prep.py<br>
+│   ├── test.py<br>
+│   └── train.py<br>
 │
-├── Load Balancer
-│   ├── Data Objects
-│   ├── Model
-│   ├── data_prep.py
-│   ├── test.py
-│   └── train.py
+├── node_modules<br>
 │
-├── node_modules
-│
-├── Dockerfile
+└──  Dockerfile<br>
 
 
 The above figure represents the structre of the project. The Candidate registeration app's directory is given above. The CandidateRegisterationWrapper in the candidateLogin file has the wrapper for all the pages in the candidate registration. React Router is used to implement this and make routes to all the other pages defined in the directory.
