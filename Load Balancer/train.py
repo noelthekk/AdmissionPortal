@@ -94,65 +94,65 @@ data_prep_location = '/app/DataObjects/'
 #(10, 500, 30, 13097705.299)
 #(12, 125, 15, 14240891.783)
 
-repeats = 2
-numberOfEpochs = 500
+repeats = 1
+numberOfEpochs = 20
 numberOfNeurons = 30
 
+def trainFunction():
+	# load dataset
+	series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, date_parser=parser2).squeeze("columns")
 
-# load dataset
-series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, date_parser=parser2).squeeze("columns")
+	# transform data to be stationary
+	raw_values = series.values
+	diff_values = difference(raw_values, 1)
 
-# transform data to be stationary
-raw_values = series.values
-diff_values = difference(raw_values, 1)
+	# transform data to be supervised learning
+	supervised = timeseries_to_supervised(diff_values, 1)
+	supervised_values = supervised.values
 
-# transform data to be supervised learning
-supervised = timeseries_to_supervised(diff_values, 1)
-supervised_values = supervised.values
+	# split data into train and test-sets
+	train, test = supervised_values[0:-24], supervised_values[-24:-12]
 
-# split data into train and test-sets
-train, test = supervised_values[0:-24], supervised_values[-24:-12]
+	# transform the scale of the data
+	scaler, train_scaled, test_scaled = scale(train, test)
 
-# transform the scale of the data
-scaler, train_scaled, test_scaled = scale(train, test)
+	dump(scaler, open(data_prep_location + 'scaler.pkl', 'wb'))
 
-dump(scaler, open(data_prep_location + 'scaler.pkl', 'wb'))
+	# repeat experiment
+	error_scores = list()
+	for r in range(repeats):
+		# fit the model
+		lstm_model = fit_lstm(train_scaled, 1, numberOfEpochs, numberOfNeurons)
+		# forecast the entire training dataset to build up state for forecasting
+		train_reshaped = train_scaled[:, 0].reshape(len(train_scaled), 1, 1)
+		lstm_model.predict(train_reshaped, batch_size=1)
+		# walk-forward validation on the test data
+		predictions = list()
+		for i in range(len(test_scaled)):
+			# make one-step forecast
+			X, y = test_scaled[i, 0:-1], test_scaled[i, -1]
+			yhat = forecast_lstm(lstm_model, 1, X)
+			# invert scaling
+			yhat = invert_scale(scaler, X, yhat)
+			# invert differencing
+			yhat = inverse_difference(raw_values, yhat, len(test_scaled)+1-i)
+			# store forecast
+			predictions.append(yhat)
+			# print('Percent: %.3f' % ((yhat - raw_values[len(test_scaled)+1-i]) / raw_values[len(test_scaled)+1-i] * 100))
+		# report performance
+		rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
+		print('%d) Test RMSE: %.3f' % (r+1, rmse))
+		error_scores.append(rmse)
 
-# repeat experiment
-error_scores = list()
-for r in range(repeats):
-	# fit the model
-	lstm_model = fit_lstm(train_scaled, 1, numberOfEpochs, numberOfNeurons)
-	# forecast the entire training dataset to build up state for forecasting
-	train_reshaped = train_scaled[:, 0].reshape(len(train_scaled), 1, 1)
-	lstm_model.predict(train_reshaped, batch_size=1)
-	# walk-forward validation on the test data
-	predictions = list()
-	for i in range(len(test_scaled)):
-		# make one-step forecast
-		X, y = test_scaled[i, 0:-1], test_scaled[i, -1]
-		yhat = forecast_lstm(lstm_model, 1, X)
-		# invert scaling
-		yhat = invert_scale(scaler, X, yhat)
-		# invert differencing
-		yhat = inverse_difference(raw_values, yhat, len(test_scaled)+1-i)
-		# store forecast
-		predictions.append(yhat)
-		# print('Percent: %.3f' % ((yhat - raw_values[len(test_scaled)+1-i]) / raw_values[len(test_scaled)+1-i] * 100))
-	# report performance
-	rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
-	print('%d) Test RMSE: %.3f' % (r+1, rmse))
-	error_scores.append(rmse)
+	# summarize results
+	results = DataFrame()
+	results['rmse'] = error_scores
 
-# summarize results
-results = DataFrame()
-results['rmse'] = error_scores
+	Series(predictions).plot(label='Predicted Load')
+	Series(raw_values[-12:]).plot(label='Actual Load')
+	pyplot.legend()
+	pyplot.show()
 
-Series(predictions).plot(label='Predicted Load')
-Series(raw_values[-12:]).plot(label='Actual Load')
-pyplot.legend()
-pyplot.show()
+	lstm_model.save(model_location)
 
-print('Mean RMSE: %.3f' % results['rmse'].mean())
-
-lstm_model.save(model_location)
+	return results['rmse'].mean()
