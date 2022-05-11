@@ -66,30 +66,31 @@ data_location = '/app/Data/'
 model_location = '/app/Model/'
 data_prep_location = '/app/DataObjects/'
 
-# load dataset
-series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, date_parser=parser2).squeeze("columns")
+def predictFunction():
+	# load dataset
+	series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, date_parser=parser2).squeeze("columns")
 
-# transform data to be stationary
-raw_values = series.values
-diff_values = difference(raw_values, 1)
+	# transform data to be stationary
+	raw_values = series.values
+	diff_values = difference(raw_values, 1)
 
-# transform data to be supervised learning
-supervised = timeseries_to_supervised(diff_values, 1)
-supervised_values = supervised.values
+	# transform data to be supervised learning
+	supervised = timeseries_to_supervised(diff_values, 1)
+	supervised_values = supervised.values
 
-window = supervised_values[-12:]
+	window = supervised_values[-12:]
 
-# transform the scale of the data
-scaler, window_scaled = scale(window)
+	# transform the scale of the data
+	scaler, window_scaled = scale(window)
 
-# load the model
-lstm_model = models.load_model(model_location)
-	
-X = window_scaled[-1, -1:]
-yhat = forecast_lstm(lstm_model, 1, X)
-yhat = invert_scale(scaler, X, yhat)
-yhat += raw_values[-1]
+	# load the model
+	lstm_model = models.load_model(model_location)
+		
+	X = window_scaled[-1, -1:]
+	yhat = forecast_lstm(lstm_model, 1, X)
+	yhat = invert_scale(scaler, X, yhat)
+	yhat += raw_values[-1]
 
-yhat = round(yhat)
+	yhat = round(yhat)
 
-print(yhat)
+	return yhat
