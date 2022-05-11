@@ -1,3 +1,4 @@
+from cgi import test
 from pandas import DataFrame
 from pandas import Series
 from pandas import concat
@@ -71,43 +72,44 @@ data_location = '/app/Data/'
 model_location = '/app/Model/'
 data_prep_location = '/app/DataObjects/'
 
-# load dataset
-series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, date_parser=parser2).squeeze("columns")
+def testFunction():
+	# load dataset
+	series = read_csv(data_location + 'Formatted-Data.csv', header=0, parse_dates=[0], index_col=0, date_parser=parser2).squeeze("columns")
 
-# transform data to be stationary
-raw_values = series.values
-diff_values = difference(raw_values, 1)
+	# transform data to be stationary
+	raw_values = series.values
+	diff_values = difference(raw_values, 1)
 
-# transform data to be supervised learning
-supervised = timeseries_to_supervised(diff_values, 1)
-supervised_values = supervised.values
+	# transform data to be supervised learning
+	supervised = timeseries_to_supervised(diff_values, 1)
+	supervised_values = supervised.values
 
-# split data into train and test-sets
-validation = supervised_values[-12:]
+	# split data into train and test-sets
+	validation = supervised_values[-12:]
 
-# transform the scale of the data
-scaler, validation_scaled = scale(validation)
+	# transform the scale of the data
+	scaler, validation_scaled = scale(validation)
 
-# load the model
-lstm_model = models.load_model(model_location)
+	# load the model
+	lstm_model = models.load_model(model_location)
 
-predictions = list()
-for i in range(len(validation_scaled)):
-	# make one-step forecast
-	X, y = validation_scaled[i, 0:-1], validation_scaled[i, -1]
-	yhat = forecast_lstm(lstm_model, 1, X)
-	# invert scaling
-	yhat = invert_scale(scaler, X, yhat)
-	# invert differencing
-	yhat = inverse_difference(raw_values, yhat, len(validation_scaled)+1-i)
-	# store forecast
-	predictions.append(yhat)
-	
-rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
+	predictions = list()
+	for i in range(len(validation_scaled)):
+		# make one-step forecast
+		X, y = validation_scaled[i, 0:-1], validation_scaled[i, -1]
+		yhat = forecast_lstm(lstm_model, 1, X)
+		# invert scaling
+		yhat = invert_scale(scaler, X, yhat)
+		# invert differencing
+		yhat = inverse_difference(raw_values, yhat, len(validation_scaled)+1-i)
+		# store forecast
+		predictions.append(yhat)
+		
+	rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
 
-# Series(predictions).plot(label='Predicted Load')
-# Series(raw_values[-12:]).plot(label='Actual Load')
-# pyplot.legend()
-# pyplot.show()
+	# Series(predictions).plot(label='Predicted Load')
+	# Series(raw_values[-12:]).plot(label='Actual Load')
+	# pyplot.legend()
+	# pyplot.show()
 
-print('Root Mean Squared Error: %0.3f' % rmse)
+	return rmse
