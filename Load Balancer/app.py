@@ -10,7 +10,7 @@ def hello_world():
 
 @app.route('/predict')
 def getPrediction():
-    json_data=[]
+    json_data=['2019-01-31']
     json_data.append(predict.predictFunction())
     
     return json.dumps(json_data)
