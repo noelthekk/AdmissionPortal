@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className='w-full flex justify-center bg-slate-200 h-screen'>
-      <div className='w-3/5 center'><CandidateRegistrationWrapper/></div>
+      <div className='w-3/5 center'><CandidateRegistrationForm/></div>
       </div>
   );
 }
