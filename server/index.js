@@ -1,13 +1,14 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
-
+var bodyparser = require("body-parser");
 
 const db = mysql.createConnection({
   user: "root",
-  host: "local",
-  password: "362394",
-  database: "admissionPortal",
+  host: "localhost",
+  password: "Rjm@58xyz",
+  database: "admissionportal",
+  port:3306
 });
 
 app.post("/home", (req, res) => {
@@ -31,18 +32,21 @@ app.post("/home", (req, res) => {
     }
   );
 });
+
 app.post("/auth", function (req, res) {
-  let registerNumber = req.body.registerNumber;
-  let password = req.body.password;
-  if (registerNumber && password) {
-    connection.query(
-      "SELECT * FROM accounts WHERE registerNumber = ? AND password = ?",
-      [registerNumber, password],
+  console.log(req.body);
+  let registerNumber = 123456;
+  let password = 123456;
+
+  if (true) {
+    db.query(
+      "SELECT * FROM accounts WHERE username = ? AND password = ?",[registerNumber, password],
+      
       function (error, results, fields) {
         if (error) throw error;
         if (results.length > 0) {
-          req.session.loggedin = true;
-          req.session.registerNumber = registerNumber;
+          
+          console.log(results);
           res.redirect("/home");
         } else {
           res.send("Incorrect registerNumber and/or Password!");
@@ -57,5 +61,5 @@ app.post("/auth", function (req, res) {
 });
 
 app.listen(3001, () => {
-  console.log("Yey, your server is running on port 3000");
+  console.log("Yey, your server is running on port 3001");
 });
