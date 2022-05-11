@@ -3,7 +3,7 @@ version: "3.7"
 services:
   load-balancer:
     build: .
-    command: sh -c "python3 predict.py"
+    command: sh -c "python3 -m flask run --host=0.0.0.0"
     ports:
       - 3000:3000
     working_dir: /app
