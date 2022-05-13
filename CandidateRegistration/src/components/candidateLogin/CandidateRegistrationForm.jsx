@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import Axios from "axios";
+// import Axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
 function CandidateRegistrationForm() {
@@ -11,8 +11,13 @@ function CandidateRegistrationForm() {
     const [yearPass, setyearPass] = useState("")
     const [monthPass, setmonthPass] = useState("")
     const [mobileNumber, setMobileNumber] = useState("")
+    let confirmMobileNum;
 
-    const handleSubmit=() => {
+      const handleSubmit=()=>{
+        console.log("submitted");
+      }
+    {
+      /* const handleSubmit=() => {
         Axios.post("http://localhost:3001/register",{
             sslc_scheme: sslcScheme,
             reg_num: registerNumber,
@@ -21,6 +26,8 @@ function CandidateRegistrationForm() {
             dob: startDate,
             
         })
+    }
+    */
     }
   return (
     <div>
@@ -143,7 +150,7 @@ function CandidateRegistrationForm() {
               placeholder="aaaaaaaaaaaaaaa"
               className="formFieldClass"
             >
-              {["Select Application Submission Mode", "aa", "bb"].map(
+              {["Select Application Submission Mode", "Online", "Offline"].map(
                 (value) => (
                   <option>{value}</option>
                 )
