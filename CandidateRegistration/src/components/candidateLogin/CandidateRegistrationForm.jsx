@@ -4,24 +4,43 @@ import Axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
 function CandidateRegistrationForm() {
-    var month=["January","February","March","April","May", "June", "July", "August","September", "October", "November", "December"]
-    const [startDate, setStartDate] = useState(new Date());
-    const [sslcScheme, setSslcScheme] = useState("SSLC (2021-2022)");
-    const [registerNumber, setRegisterNumber] = useState("")
-    const [yearPass, setyearPass] = useState("")
-    const [monthPass, setmonthPass] = useState("")
-    const [mobileNumber, setMobileNumber] = useState("")
+  var month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const [startDate, setStartDate] = useState();//new Date());
+  const [sslcScheme, setSslcScheme] = useState("SSLC (2021-2022)");
+  const [registerNumber, setRegisterNumber] = useState("");
+  const [yearPass, setyearPass] = useState("");
+  const [monthPass, setmonthPass] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [ modeOfApplication, setmodeofApplication] = useState("");
+  let confirmMobileNum;
 
-    const handleSubmit=() => {
-        Axios.post("http://localhost:3001/register",{
-            sslc_scheme: sslcScheme,
-            reg_num: registerNumber,
-            month_pass: monthPass,
-            year_pass: yearPass,
-            dob: startDate,
-            
-        })
-    }
+  const handleSubmit = () => {
+    console.log(sslcScheme);
+    Axios.post("http://localhost:3001/register", {
+      sslcScheme: sslcScheme,
+      registerNumber: registerNumber,
+      yearPass: yearPass,
+      monthPass: monthPass,
+      startDate: startDate,
+      mobileNumber: mobileNumber,
+      modeOfApplication: modeOfApplication,
+    }).then(() => {
+      console.log("success insert");
+    });
+  };
   return (
     <div>
       <form className="pt-8 space-y-6 " onSubmit={handleSubmit}>
@@ -66,8 +85,8 @@ function CandidateRegistrationForm() {
               onChange={(e) => setmonthPass(e.target.value)}
               className="formFieldClass"
             >
-              {month.map((value) => (
-                <option>{value}</option>
+              {month.map((value,index) => (
+                <option key={index}>{value}</option>
               ))}
             </select>
           </div>
@@ -129,7 +148,9 @@ function CandidateRegistrationForm() {
               id="confirmMobileN"
               name="confirmMobileN"
               value={confirmMobileNum}
-              onChange={(e) => {confirmMobileNum = e.target.value}}
+              onChange={(e) => {
+                confirmMobileNum = e.target.value;
+              }}
               className="formFieldClass"
             ></input>
           </div>
@@ -141,9 +162,12 @@ function CandidateRegistrationForm() {
               id="modeOfApplication"
               name="modeOfApplication"
               placeholder="aaaaaaaaaaaaaaa"
+              value={modeOfApplication}
+              onChange={(e) => setmodeofApplication
+                (e.target.value)}
               className="formFieldClass"
             >
-              {["Select Application Submission Mode", "aa", "bb"].map(
+              {["Select Application Submission Mode", "Online", "Offline"].map(
                 (value) => (
                   <option>{value}</option>
                 )
@@ -160,4 +184,4 @@ function CandidateRegistrationForm() {
   );
 }
 
-export default CandidateRegistrationForm
+export default CandidateRegistrationForm;

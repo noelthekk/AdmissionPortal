@@ -11,16 +11,14 @@ function CandidateLogin() {
   //   event.preventDefault();
   // }
 
-  const Login = (event) => {
-    event.preventDefault();
-    
-    Axios.post("http://localhost:3001", {
+  const Login = () => {
+    console.log(registerNumber);
+    Axios.post("http://localhost:3001/login", {
       registerNumber: registerNumber,
       candidatePassword: candidatePassword,
-      
     }).then((response) => {
       console.log(response);
-    })
+    });
   };
 
   return (
@@ -56,9 +54,7 @@ function CandidateLogin() {
           </div>
 
           <div className="formFieldDiv flex justify-end">
-      
               <input type="submit" className="btn" value="Submit" />
-            
           </div>
           
         </div>
