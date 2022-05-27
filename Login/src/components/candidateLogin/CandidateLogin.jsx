@@ -11,13 +11,13 @@ function CandidateLogin() {
   // }
 
   const Login = () => {
-    Axios.post("http://localhost:3000", {
+    console.log(registerNumber);
+    Axios.post("http://localhost:3001/login", {
       registerNumber: registerNumber,
       candidatePassword: candidatePassword,
-      
     }).then((response) => {
       console.log(response);
-    })
+    });
   };
 
   return (
@@ -53,9 +53,7 @@ function CandidateLogin() {
           </div>
 
           <div className="formFieldDiv flex justify-end">
-            <Link to="/pswd" activeClassName="active">
               <input type="submit" className="btn" value="Submit" />
-            </Link>
           </div>
           
         </div>

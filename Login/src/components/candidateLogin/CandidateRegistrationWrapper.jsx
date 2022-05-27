@@ -11,7 +11,7 @@ function CandidateRegistrationWrapper() {
       </div>
       <br />
       <Routes>
-        <Route path="/candlogin" element={<CandidateLogin />} />
+        <Route path="candlogin" element={<CandidateLogin />} />
       </Routes>
     </div>
   );

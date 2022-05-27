@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import CandidateRegistrationWrapper from './components/candidateLogin/CandidateRegistrationWrapper';
-import DataSheet from './components/DataSheet';
+
 //import SignForm from './components/SignForm'
 // <SignForm/>
 function App() {
