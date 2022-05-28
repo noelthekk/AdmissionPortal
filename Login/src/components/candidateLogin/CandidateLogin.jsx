@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 function CandidateLogin() {
   const [registerNumber, setRegisterNumber] = useState("");
@@ -12,6 +13,7 @@ function CandidateLogin() {
 
   const Login = () => {
     console.log(registerNumber);
+    console.log(candidatePassword);
     Axios.post("http://localhost:3001/login", {
       registerNumber: registerNumber,
       candidatePassword: candidatePassword,
@@ -53,9 +55,9 @@ function CandidateLogin() {
           </div>
 
           <div className="formFieldDiv flex justify-end">
-              <input type="submit" className="btn" value="Submit" />
+            <input type="submit" className="btn" value="Submit" />
+            <script>console.log(registerNumber);</script>
           </div>
-          
         </div>
       </form>
     </div>

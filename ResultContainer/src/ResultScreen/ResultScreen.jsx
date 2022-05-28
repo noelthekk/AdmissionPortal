@@ -1,5 +1,4 @@
 import React from 'react'
-import './ResultScreen.css'
 import { AiFillPrinter } from 'react-icons/ai';
 function ResultScreen() {
 

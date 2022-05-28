@@ -15,9 +15,9 @@ const db = mysql.createConnection({
 app.post("/login", (req, res) => {
   console.log(req.body);
   const registerNumber = req.body.registerNumber;
-  const password = req.body.candidatePasssword;
-  db.query("INSERT INTO accounts (Register_num, password) VALUES (?, ?) ",
-  [registerNumber, password], (err, result) => {
+  const candidatePassword = req.body.candidatePasssword;
+  db.query("INSERT INTO login (registerNumber, candidatePassword) VALUES (?, ?) ",
+  [registerNumber, candidatePassword], (err, result) => {
     if(err) {
       console.log(err);
     } else {
