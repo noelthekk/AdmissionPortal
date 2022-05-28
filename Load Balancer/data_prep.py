@@ -12,10 +12,9 @@ def parser(x):
 
 data_location = '/app/Data/'
 
+def prepare():
+  series = read_csv(data_location + 'lacity.org-website-traffic.csv', header=0, index_col=0, parse_dates=[0], date_parser=parser)
 
-series = read_csv(data_location + 'lacity.org-website-traffic.csv', header=0, index_col=0, parse_dates=[0], date_parser=parser)
-
-series.drop(columns=['Device Category', 'Browser', 'Sessions', 'Bounce Rate'], inplace=True)
-series = series.groupby(Grouper(freq='M')).sum()
-series.drop(['2019-01-31', '2019-02-28', '2019-03-31', '2019-04-30', '2019-05-31', '2019-06-30', '2019-07-31', '2019-08-31'], inplace=True)
-series.to_csv(data_location + 'Formatted-Data.csv')
+  series.drop(columns=['Device Category', 'Browser', 'Sessions', 'Bounce Rate'], inplace=True)
+  series = series.groupby(Grouper(freq='D')).sum()
+  series.to_csv(data_location + 'Formatted-Data.csv')

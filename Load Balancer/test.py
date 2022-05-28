@@ -85,7 +85,7 @@ def testFunction():
 	supervised_values = supervised.values
 
 	# split data into train and test-sets
-	validation = supervised_values[-12:]
+	validation = supervised_values[-30:]
 
 	# transform the scale of the data
 	scaler, validation_scaled = scale(validation)
@@ -105,7 +105,7 @@ def testFunction():
 		# store forecast
 		predictions.append(yhat)
 		
-	rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
+	rmse = sqrt(mean_squared_error(raw_values[-30:], predictions))
 
 	# Series(predictions).plot(label='Predicted Load')
 	# Series(raw_values[-12:]).plot(label='Actual Load')
