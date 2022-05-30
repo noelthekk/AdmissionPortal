@@ -15,6 +15,7 @@ from math import sqrt
 from matplotlib import pyplot
 import numpy
 from pickle import load
+import json
 
 # date-time parsing function for loading the dataset
 def parser2(x):
@@ -94,6 +95,7 @@ def testFunction():
 	lstm_model = models.load_model(model_location)
 
 	predictions = list()
+	json_data = []
 	for i in range(len(validation_scaled)):
 		# make one-step forecast
 		X, y = validation_scaled[i, 0:-1], validation_scaled[i, -1]
@@ -104,12 +106,14 @@ def testFunction():
 		yhat = inverse_difference(raw_values, yhat, len(validation_scaled)+1-i)
 		# store forecast
 		predictions.append(yhat)
+		json_data.append('Percent: %.3f' % ((yhat - raw_values[len(validation_scaled)+1-i]) / raw_values[len(validation_scaled)+1-i] * 100))
 		
 	rmse = sqrt(mean_squared_error(raw_values[-30:], predictions))
-
+	json_data.append("RMSE: ")
+	json_data.append(rmse)
 	# Series(predictions).plot(label='Predicted Load')
 	# Series(raw_values[-12:]).plot(label='Actual Load')
 	# pyplot.legend()
 	# pyplot.show()
 
-	return rmse
+	return json_data

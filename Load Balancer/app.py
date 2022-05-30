@@ -33,10 +33,7 @@ def trainModel():
 
 @app.route('/test')
 def testModel():
-    json_data=['RMSE: ']
-    json_data.append(test.testFunction())
-
-    return json.dumps(json_data)
+    return json.dumps(test.testFunction())
 
 
 if __name__ == "__main__":

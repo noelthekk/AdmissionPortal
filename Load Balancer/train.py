@@ -70,6 +70,8 @@ def fit_lstm(train, batch_size, nb_epoch, neurons):
 	model = Sequential()
 	model.add(LSTM(neurons, batch_input_shape=(batch_size, X.shape[1], X.shape[2]), stateful=True))
 	model.add(Dense(1))
+	model.add(Dense(1))
+	model.add(Dense(1))
 	model.compile(loss='mean_squared_error', optimizer='adam')
 	for i in range(nb_epoch):
 		model.fit(X, y, epochs=1, batch_size=batch_size, verbose=0, shuffle=False)
@@ -88,12 +90,10 @@ data_location = '/app/Data/'
 model_location = '/app/Model/'
 data_prep_location = '/app/DataObjects/'
 
-# promising values:
-#(10, 500, 30, 13097705.299)
-#(12, 125, 15, 14240891.783)
 
-repeats = 1
-numberOfEpochs = 1
+
+repeats = 5
+numberOfEpochs = 20
 numberOfNeurons = 30
 
 def trainFunction():
