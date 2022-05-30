@@ -45,17 +45,15 @@ def inverse_difference(history, yhat, interval=1):
 	return yhat + history[-interval]
 
 # scale train and test data to [-1, 1]
-def scale(train, test):
+def scale(train):
 	# fit scaler
 	scaler = MinMaxScaler(feature_range=(-1, 1))
 	scaler = scaler.fit(train)
 	# transform train
 	train = train.reshape(train.shape[0], train.shape[1])
 	train_scaled = scaler.transform(train)
-	# transform test
-	test = test.reshape(test.shape[0], test.shape[1])
-	test_scaled = scaler.transform(test)
-	return scaler, train_scaled, test_scaled
+
+	return scaler, train_scaled
 
 # inverse scaling for a forecasted value
 def invert_scale(scaler, X, value):
@@ -95,7 +93,7 @@ data_prep_location = '/app/DataObjects/'
 #(12, 125, 15, 14240891.783)
 
 repeats = 1
-numberOfEpochs = 20
+numberOfEpochs = 1
 numberOfNeurons = 30
 
 def trainFunction():
@@ -110,11 +108,10 @@ def trainFunction():
 	supervised = timeseries_to_supervised(diff_values, 1)
 	supervised_values = supervised.values
 
-	# split data into train and test-sets
-	train, test = supervised_values[0:-24], supervised_values[-24:-12]
+	train = supervised_values[:-30]
 
 	# transform the scale of the data
-	scaler, train_scaled, test_scaled = scale(train, test)
+	scaler, train_scaled = scale(train)
 
 	dump(scaler, open(data_prep_location + 'scaler.pkl', 'wb'))
 
@@ -127,32 +124,34 @@ def trainFunction():
 		train_reshaped = train_scaled[:, 0].reshape(len(train_scaled), 1, 1)
 		lstm_model.predict(train_reshaped, batch_size=1)
 		# walk-forward validation on the test data
-		predictions = list()
-		for i in range(len(test_scaled)):
-			# make one-step forecast
-			X, y = test_scaled[i, 0:-1], test_scaled[i, -1]
-			yhat = forecast_lstm(lstm_model, 1, X)
-			# invert scaling
-			yhat = invert_scale(scaler, X, yhat)
-			# invert differencing
-			yhat = inverse_difference(raw_values, yhat, len(test_scaled)+1-i)
-			# store forecast
-			predictions.append(yhat)
+		# predictions = list()
+		# for i in range(len(test_scaled)):
+		# 	# make one-step forecast
+		# 	X, y = test_scaled[i, 0:-1], test_scaled[i, -1]
+		# 	yhat = forecast_lstm(lstm_model, 1, X)
+		# 	# invert scaling
+		# 	yhat = invert_scale(scaler, X, yhat)
+		# 	# invert differencing
+		# 	yhat = inverse_difference(raw_values, yhat, len(test_scaled)+1-i)
+		# 	# store forecast
+		# 	predictions.append(yhat)
 			# print('Percent: %.3f' % ((yhat - raw_values[len(test_scaled)+1-i]) / raw_values[len(test_scaled)+1-i] * 100))
 		# report performance
-		rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
-		print('%d) Test RMSE: %.3f' % (r+1, rmse))
-		error_scores.append(rmse)
+		# rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
+		# print('%d) Test RMSE: %.3f' % (r+1, rmse))
+		# error_scores.append(rmse)
 
 	# summarize results
-	results = DataFrame()
-	results['rmse'] = error_scores
+	# results = DataFrame()
+	# results['rmse'] = error_scores
 
-	Series(predictions).plot(label='Predicted Load')
-	Series(raw_values[-12:]).plot(label='Actual Load')
-	pyplot.legend()
-	pyplot.show()
+	# Series(predictions).plot(label='Predicted Load')
+	# Series(raw_values[-12:]).plot(label='Actual Load')
+	# pyplot.legend()
+	# pyplot.show()
 
 	lstm_model.save(model_location)
 
-	return results['rmse'].mean()
+	# return results['rmse'].mean()
+
+	return "Training complete"
