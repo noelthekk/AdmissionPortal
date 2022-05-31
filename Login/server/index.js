@@ -12,14 +12,17 @@ const db = mysql.createConnection({
   password: "password",
   database: "admissionPortal",
 });
+ //end of app.post()
 app.post("/login", (req, res) => {
   console.log(req.body);
-  const registerNumber = req.body.registerNumber;
-  const candidatePassword = req.body.candidatePasssword;
-  db.query("INSERT INTO login (registerNumber, candidatePassword) VALUES (?, ?) ",
-  [registerNumber, candidatePassword], (err, result) => {
-    if(err) {
+  const regNum = req.body.registerNumber;
+  const password = req.body.candidatePasssword;
+  db.query("SELECT registerNumber from login WHERE registerNumber =  and candidatePassword = 'test'",
+  (err, result) => {
+    if(result.length = 0) {
       console.log(err);
+      console.log("hello");
+      console.log(result[0]);
     } else {
       console.log("no probss");
     }
