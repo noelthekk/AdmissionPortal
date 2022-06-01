@@ -27,7 +27,7 @@ function CandidateRegistrationForm() {
   const [ modeOfApplication, setmodeofApplication] = useState("");
   let confirmMobileNum;
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
     console.log(sslcScheme);
     Axios.post("http://localhost:3001/register", {
       sslcScheme: sslcScheme,
@@ -40,6 +40,7 @@ function CandidateRegistrationForm() {
     }).then(() => {
       console.log("success insert");
     });
+    event.preventDefault();
   };
   return (
     <div>

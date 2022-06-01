@@ -7,18 +7,32 @@ services:
   register:
     build: ./CandidateRegistration
     ports:
-      - 3000:3000
+      - 3000-3050:3000
   login:
     build: ./Login
     ports:
-      - 3002
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    container_name: nginx-proxy
+      - 4000-4050:3002
+
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./reverse_proxy
     ports:
-      - 8080:3002
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-networks:
-  default:
-    name: nginx-proxy
+      # Dev
+      # - 1337:80
+      # Prod
+      - 8080:8080
+      # - 443:443
+    depends_on:
+      - register
+   
+  # reverse-proxy:
+  #   image: nginx:1.17.10
+  #   container_name: reverse_proxy_demo
+  #   depends_on:
+  #     - login
+  #   volumes:
+  #     - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
+  #   ports:
+  #     - 8080:8080
+
