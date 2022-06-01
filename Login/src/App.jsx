@@ -2,7 +2,6 @@ import React from 'react'
 import './App.css'
 import CandidateRegistrationWrapper from './components/candidateLogin/CandidateRegistrationWrapper';
 
-
 function App() {
 
   return (

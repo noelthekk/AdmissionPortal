@@ -1,17 +1,30 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 function CandidateLogin() {
   const [registerNumber, setRegisterNumber] = useState("");
   const [candidatePassword, setCandidatePassword] = useState("");
 
-  function handleSubmit(event) {
+  // function handleSubmit(event) {
+  //   console.log(registerNumber);
+  //   event.preventDefault();
+  // }
+
+  const Login = () => {
     console.log(registerNumber);
-    event.preventDefault();
-  }
+    console.log(candidatePassword);
+    Axios.post("http://localhost:3001/login", {
+      registerNumber: registerNumber,
+      candidatePassword: candidatePassword,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+
   return (
     <div>
-      <form className="pt-8 space-y-6 " onSubmit={handleSubmit}>
+      <form className="pt-8 space-y-6 " onSubmit={Login}>
         <div>
           <div className="formFieldDiv">
             <label htmlFor="registerNumber" className="w-2/5">
@@ -42,11 +55,9 @@ function CandidateLogin() {
           </div>
 
           <div className="formFieldDiv flex justify-end">
-            <Link to="/pswd" activeClassName="active">
-              <input type="submit" className="btn" value="Submit" />
-            </Link>
+            <input type="submit" className="btn" value="Submit" />
+            <script>console.log(registerNumber);</script>
           </div>
-          
         </div>
       </form>
     </div>
