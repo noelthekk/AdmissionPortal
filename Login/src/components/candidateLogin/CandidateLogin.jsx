@@ -6,11 +6,6 @@ function CandidateLogin() {
   const [registerNumber, setRegisterNumber] = useState("");
   const [candidatePassword, setCandidatePassword] = useState("");
 
-  // function handleSubmit(event) {
-  //   console.log(registerNumber);
-  //   event.preventDefault();
-  // }
-
   const Login = () => {
     console.log(registerNumber);
     Axios.post("http://localhost:3001/login", {
@@ -23,6 +18,10 @@ function CandidateLogin() {
 
   return (
     <div>
+      <div className="text-center font-medium text-xl uppercase pt-10">
+        Candidate Login
+      </div>
+      <br />
       <form className="pt-8 space-y-6 " onSubmit={Login}>
         <div>
           <div className="formFieldDiv">

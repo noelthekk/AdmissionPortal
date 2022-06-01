@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  # result:
+  #   build: ./ResultContainer
+  #   ports:
+  #     - 3001:3001
+  register:
+    build: ./CandidateRegistration
+    ports:
+      - 3000:3000
+  login:
+    build: ./Login
+    ports:
+      - 3002
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - 8080:3002
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+networks:
+  default:
+    name: nginx-proxy
