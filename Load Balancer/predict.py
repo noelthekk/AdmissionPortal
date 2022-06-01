@@ -78,7 +78,7 @@ def predictFunction():
 	supervised = timeseries_to_supervised(diff_values, 1)
 	supervised_values = supervised.values
 
-	window = supervised_values[-30:]
+	window = supervised_values[-10:]
 
 	# transform the scale of the data
 	scaler, window_scaled = scale(window)
