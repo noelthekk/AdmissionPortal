@@ -13,9 +13,9 @@ function ResultScreen() {
 
   var allotmentList = [
     {schoolName:"padma school",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"A+"},
-    {schoolName:"Rajeev Gandhi School",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"C"},
-    {schoolName:"Vijaya raja Shool",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"B"},
-    {schoolName:"Don Campus",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"D"},
+    {schoolName:"Rajeev Gandhi School",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"A+"},
+    {schoolName:"Vijaya raja Shool",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"A+"},
+    {schoolName:"Don Campus",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"A+"},
 ];
 
   return (
