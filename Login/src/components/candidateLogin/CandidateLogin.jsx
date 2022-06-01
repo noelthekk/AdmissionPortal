@@ -56,7 +56,6 @@ function CandidateLogin() {
 
           <div className="formFieldDiv flex justify-end">
             <input type="submit" className="btn" value="Submit" />
-            <script>console.log(registerNumber);</script>
           </div>
         </div>
       </form>

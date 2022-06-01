@@ -14,17 +14,19 @@ const db = mysql.createConnection({
 });
  //end of app.post()
 app.post("/login", (req, res) => {
-  console.log(req.body);
+  console.log(req.body);  
   const regNum = req.body.registerNumber;
-  const password = req.body.candidatePasssword;
-  db.query("SELECT registerNumber from login WHERE registerNumber =  and candidatePassword = 'test'",
+  const password = req.body.candidatePassword;
+  console.log(regNum);
+  console.log(password);
+  db.query("SELECT registerNumber from login WHERE registerNumber = ?  and candidatePassword = ?",[regNum, password],
+  // db.query("INSERT INTO login (registerNumber, candidatePassword) VALUES (?, ?)", [regNum, password],
   (err, result) => {
-    if(result.length = 0) {
-      console.log(err);
-      console.log("hello");
-      console.log(result[0]);
+    console.log(result);
+    if(err) {
+      res.send("password Incorrect");
     } else {
-      console.log("no probss");
+      res.send(true);
     }
   });
 });

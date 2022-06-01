@@ -1,13 +1,21 @@
-import React from 'react'
+// import React from 'react'
+// import Axios from "axios";
 import { AiFillPrinter } from 'react-icons/ai';
+
+//  const getResult = () => {
+//    Axios.get("http://localhost:3001/students").then((response) => {
+//      setStudentList(response.data);
+//    });
+//  };
+
 function ResultScreen() {
 
 
   var allotmentList = [
-    {schoolName:"abc",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"aaa"},
-    {schoolName:"abc",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"aaa"},
-    {schoolName:"abc",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"aaa"},
-    {schoolName:"abc",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"aaa"},
+    {schoolName:"padma school",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"A+"},
+    {schoolName:"Rajeev Gandhi School",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"C"},
+    {schoolName:"Vijaya raja Shool",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"B"},
+    {schoolName:"Don Campus",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"D"},
 ];
 
   return (
