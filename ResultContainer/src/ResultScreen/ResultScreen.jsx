@@ -1,14 +1,21 @@
-import React from 'react'
-import './ResultScreen.css'
+// import React from 'react'
+// import Axios from "axios";
 import { AiFillPrinter } from 'react-icons/ai';
+
+//  const getResult = () => {
+//    Axios.get("http://localhost:3001/students").then((response) => {
+//      setStudentList(response.data);
+//    });
+//  };
+
 function ResultScreen() {
 
 
   var allotmentList = [
-    {schoolName:"abc",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"aaa"},
-    {schoolName:"abc",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"aaa"},
-    {schoolName:"abc",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"aaa"},
-    {schoolName:"abc",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"aaa"},
+    {schoolName:"padma school",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"A+"},
+    {schoolName:"Rajeev Gandhi School",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"A+"},
+    {schoolName:"Vijaya raja Shool",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"A+"},
+    {schoolName:"Don Campus",courseName:"CS",lastRank:121,currRank:100,wgpa:7.44,wgpaDetails:"A+"},
 ];
 
   return (
@@ -24,24 +31,24 @@ function ResultScreen() {
   <table className="mt-10 table-auto border-collapse border-2 border-blue-300 min-w-full text-center rounded-lg">
   <thead className='bg-blue-300'>
     <tr>
-      <th>Option No</th>
-      <th>School Name</th>
-      <th>Course Name</th>
-      <th>Last Rank</th>
-      <th>Rank</th>
-      <th>WGPA</th>
-      <th>WGPA Details</th>
+      <th className='py-2'>Option No</th>
+      <th className='py-2'>School Name</th>
+      <th className='py-2'>Course Name</th>
+      <th className='py-2'>Last Rank</th>
+      <th className='py-2'>Rank</th>
+      <th className='py-2'>WGPA</th>
+      <th className='py-2'>WGPA Details</th>
     </tr>
   </thead>
   <tbody>
   {allotmentList.map((value,i)=><tr key={i}>
-    <td>{i}</td>
-    <td>{value.schoolName}</td>
-    <td>{value.courseName}</td>
-    <td>{value.lastRank}</td>
-    <td>{value.currRank}</td>
-    <td>{value.wgpa}</td>
-    <td>{value.wgpaDetails}</td>
+    <td className='py-2'>{i}</td>
+    <td className='py-2'>{value.schoolName}</td>
+    <td className='py-2'>{value.courseName}</td>
+    <td className='py-2'>{value.lastRank}</td>
+    <td className='py-2'>{value.currRank}</td>
+    <td className='py-2'>{value.wgpa}</td>
+    <td className='py-2'>{value.wgpaDetails}</td>
   </tr>)}
   </tbody>
   </table>
