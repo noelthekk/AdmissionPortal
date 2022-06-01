@@ -12,7 +12,7 @@ function AdminLoginWrapper() {
       </div>
       <br />
       <Routes>
-        <Route path="/admlogin" element={<AdminLogin/>} />
+        <Route path="" element={<AdminLogin/>} />
         <Route path="/admpanel" element={<AdminPanel/>} />
       </Routes>
     </div>

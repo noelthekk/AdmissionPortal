@@ -13,20 +13,20 @@ const db = mysql.createConnection({
   database: "admissionPortal",
 });
  //end of app.post()http://localhost:3000/
-app.post("/login", (req, res) => {
+app.post("/admin", (req, res) => {
   console.log(req.body);  
-  const regNum = req.body.registerNumber;
-  const password = req.body.candidatePassword;
+  const id = req.body.adminId;
+  const password = req.body.adminPassword;
   console.log(regNum);
   console.log(password);
-  db.query("SELECT registerNumber from login WHERE registerNumber = ?  and candidatePassword = ?",[regNum, password],
+  db.query("SELECT admin_id from admin WHERE adminId = ?  and password = ?",[id, password],
   // db.query("INSERT INTO login (registerNumber, candidatePassword) VALUES (?, ?)", [regNum, password],
   (err, result) => {
     console.log(result);
     if(err) {
       console.log("password correct");
     } else {
-      res.redirect("/pwd");
+      res.redirect("/admpanelm");
     }
   });
 });
